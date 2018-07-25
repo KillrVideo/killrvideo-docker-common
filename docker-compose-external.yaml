@@ -29,7 +29,7 @@ services:
 
   # Start the KillrVideo web UI on port 3000
   web:
-    image: killrvideo/killrvideo-web:1.2.8
+    image: killrvideo/killrvideo-web:2.1.0
     ports:
     - "3000:3000"
     depends_on:
@@ -42,10 +42,12 @@ services:
       KILLRVIDEO_DSE_PASSWORD: $KILLRVIDEO_DSE_PASSWORD
       KILLRVIDEO_CASSANDRA_REPLICATION: $KILLRVIDEO_CASSANDRA_REPLICATION
       KILLRVIDEO_LOGGING_LEVEL: $KILLRVIDEO_LOGGING_LEVEL
+    volumes:
+      - "../../cassandra.cert:/opt/killrvideo-web/cassandra.cert"
 
   # The sample data generator
   generator:
-    image: killrvideo/killrvideo-generator:1.2.5
+    image: killrvideo/killrvideo-generator:2.1.0
     depends_on:
     - dse-config
     - etcd
@@ -56,11 +58,14 @@ services:
       NODE_ENV: $NODE_ENV
       KILLRVIDEO_CASSANDRA_REPLICATION: $KILLRVIDEO_CASSANDRA_REPLICATION
       KILLRVIDEO_LOGGING_LEVEL: $KILLRVIDEO_LOGGING_LEVEL
+      KILLRVIDEO_YOUTUBE_API_KEY: $KILLRVIDEO_YOUTUBE_API_KEY
+    volumes:
+      - "../../cassandra.cert:/opt/killrvideo-generator/cassandra.cert"
     
   # Container to load KillrVideo schema and search config into DSE
   # Provides options to configure secure users as well
   dse-config:
-    image: killrvideo/killrvideo-dse-config:1.2.2
+    image: killrvideo/killrvideo-dse-config:2.1.0
     environment:
       KILLRVIDEO_DOCKER_IP: $KILLRVIDEO_DOCKER_IP
       KILLRVIDEO_DSE_EXTERNAL_IP: $KILLRVIDEO_DSE_EXTERNAL_IP
@@ -68,6 +73,10 @@ services:
       KILLRVIDEO_GRAPH_REPLICATION: $KILLRVIDEO_GRAPH_REPLICATION
       KILLRVIDEO_DSE_USERNAME: $KILLRVIDEO_DSE_USERNAME
       KILLRVIDEO_DSE_PASSWORD: $KILLRVIDEO_DSE_PASSWORD
+      KILLRVIDEO_ENABLE_SSL: $KILLRVIDEO_ENABLE_SSL
+      KILLRVIDEO_DSE_REQUEST_TIMEOUT: $KILLRVIDEO_DSE_REQUEST_TIMEOUT
+    volumes:
+      - "../../cassandra.cert:/opt/killrvideo-data/cassandra.cert"
 
   # One instance of DataStax Studio
   studio:
