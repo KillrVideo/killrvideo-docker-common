@@ -1,0 +1,25 @@
+version: '3'
+
+#
+# docker-compose.yaml
+#   Override compose file for running with an externally provided cluster
+#
+
+services:
+
+services:
+  # Disable running DSE in this Docker compose
+  dse:
+    entrypoint: ["echo", "Service DSE disabled from running in Docker - external cluster in use"]
+
+
+  # Container to load KillrVideo schema and search config into DSE
+  # Provides options to configure secure users as well
+  dse-config:
+    environment:
+      KILLRVIDEO_DSE_EXTERNAL_IP: $KILLRVIDEO_DSE_EXTERNAL_IP
+      KILLRVIDEO_CASSANDRA_REPLICATION: $KILLRVIDEO_CASSANDRA_REPLICATION
+      KILLRVIDEO_GRAPH_REPLICATION: $KILLRVIDEO_GRAPH_REPLICATION
+      KILLRVIDEO_DSE_USERNAME: $KILLRVIDEO_DSE_USERNAME
+      KILLRVIDEO_DSE_PASSWORD: $KILLRVIDEO_DSE_PASSWORD
+

@@ -1,0 +1,10 @@
+version: '3'
+
+#
+# docker-compose-backend-python.yaml
+#   Override compose file for running the Python services
+#
+
+services:
+  backend:
+    image: killrvideo/killrvideo-python
