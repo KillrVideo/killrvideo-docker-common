@@ -62,3 +62,5 @@ this make sure to define the `KILLRVIDEO_DSE_USERNAME` and `KILLRVIDEO_DSE_PASSW
 you may keep the data even when recreating the container
 * `docker-compose-ops-center.yaml` - adding this runs an instance of OpsCenter
 
+To get the effective configuration that results from application of all of your selected config files, use
+the command `docker-compose config`.
