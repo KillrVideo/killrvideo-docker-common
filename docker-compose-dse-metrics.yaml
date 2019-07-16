@@ -1,3 +1,5 @@
+# Runs DSE with metrics collection enabled
+# see https://github.com/datastax/dse-metric-reporter-dashboards
 version: '3'
 services:
 
