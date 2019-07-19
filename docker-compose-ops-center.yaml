@@ -20,3 +20,5 @@ services:
     environment:
       SERVICE_8888_NAME: opscenter
       DS_LICENSE: accept
+    volumes:
+      - ./opscenter/Test_Cluster.conf:/opt/opscenter/conf/clusters/Test_Cluster.conf
