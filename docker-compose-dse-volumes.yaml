@@ -16,6 +16,7 @@ services:
       # with the Cassandra data directory on our node
       # (using relative paths to store at the root directory of the repository which includes
       # these files, i.e. killrvideo-java or killrvideo-nodejs)
-      - "../../dse-data:/var/lib/cassandra"
+      - ./dse-data:/var/lib/cassandra
 
-
+volumes:
+  dse-data:
