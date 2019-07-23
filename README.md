@@ -64,3 +64,12 @@ you may keep the data even when recreating the container
 
 To get the effective configuration that results from application of all of your selected config files, use
 the command `docker-compose config`.
+
+## Deploying to Kubernetes
+You can deploy your effective Docker configuration to Kubernetes in two steps:
+
+* First, run the command `./kompose-convert.sh`. This will generate resource definitions in the `k8s` subdirectory
+* Then, deploy the configuration by running `kubectl apply -f ./k8s`
+
+Optionally, you may wish to delete the contents of the `k8s` directory between runs of `kompose-convert.sh`
+
