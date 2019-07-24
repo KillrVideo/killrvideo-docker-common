@@ -7,6 +7,8 @@ then
 else
     mkdir ./k8s
 fi
-docker-compose config | kompose convert -f - -o ./k8s 
+
+# using "--volumes hostPath" to mount local files into Kubernetes pods
+docker-compose config | kompose convert -f - -o ./k8s --volumes hostPath
 
 echo "You can now deploy KillrVideo to Kubernetes with 'kubectl apply -f ./k8s'"
