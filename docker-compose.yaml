@@ -42,7 +42,7 @@ services:
       kompose.service.type: nodeport # Adds a label for Kompose to expose service externally
 
   dse: # DataStax Enterprise Database
-    image: datastax/dse-server:6.7.0
+    image: datastax/dse-server:6.7.4
     command: [ -s -g ] # Run with Search and Graph capabilities enabled
     ports: # Exposes ports to be available. Kompose tool needs that to create a k8s service and make backend available for other services.
       - "9042:9042" # Exposes DSE port
