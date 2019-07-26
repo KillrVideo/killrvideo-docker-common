@@ -4,3 +4,4 @@
 *.iml
 dse-data
 k8s
+.DS_Store
