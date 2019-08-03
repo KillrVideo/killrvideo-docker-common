@@ -56,10 +56,18 @@ additional `docker-compose-dse-*.yaml` files that may have been specified). If u
 `KILLRVIDEO_EXTERNAL_IP` environment variable
 * `docker-compose-dse-metrics.yaml` - adding this file enables metrics collection on DSE and runs Prometheus (port X) 
 and Grafana (port X)
-* `docker-compose-dse-secure.yaml` - adding this file swaps in DSE configuration files to enable authentication. If using 
-this make sure to define the `KILLRVIDEO_DSE_USERNAME` and `KILLRVIDEO_DSE_PASSWORD` environment variables.
+* `docker-compose-dse-secure.yaml` - adding this file swaps in DSE configuration files to enable the DSE
+authentication, authorization and role management modules. If using this compose file, make sure to define 
+the `KILLRVIDEO_DSE_USERNAME` and `KILLRVIDEO_DSE_PASSWORD` environment variables and set 
+`KILLRVIDEO_CREATE_DSE_USER=true`, so that the `killrvideo_dse_config` container will create the user. 
+You may also choose to override the default administrator account `cassandra/cassandra` by setting 
+`KILLRVIDEO_CREATE_ADMIN_USER=true` and providing values for `KILLRVIDEO_ADMIN_USERNAME` and
+`KILLRVIDEO_ADMIN_PASSWORD`. PLEASE NOTE: if you have previously used the `docker-compose-dse-volumes.yaml` 
+described below, you will want to make sure to delete any existing DSE container and the contents of the 
+`dse_data` directory, as the security configuration logic in `killrvideo-dse-config` is designed to be run
+on a fresh node/cluster.
 * `docker-compose-dse-volumes.yaml` - adding this causes DSE to store its data files in the directory dse-data so that
-you may keep the data even when recreating the container
+you may keep the data even when recreating the container (note warning above under `docker-compose-dse-secure.yaml`)
 * `docker-compose-ops-center.yaml` - adding this runs an instance of OpsCenter
 
 To get the effective configuration that results from application of all of your selected config files, use
