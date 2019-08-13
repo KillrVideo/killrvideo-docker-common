@@ -1,0 +1,11 @@
+version: '3'
+
+#
+# docker-compose-omit-dse-config.yaml
+#   Override compose file for disabling schema initialization 
+#
+
+services:
+  # Disable running DSE-CONFIG in this Docker compose
+  dse-config:
+    entrypoint: ["echo", "Service DSE-CONFIG disabled from running in Docker - schema already initialized"]

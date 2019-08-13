@@ -11,10 +11,19 @@ services:
     entrypoint: ["echo", "Service DSE disabled from running in Docker - external cluster in use"]
 
 
-  # Container to load KillrVideo schema and search config into DSE
-  # Provides options to configure secure users as well
+  # Passing cluster contact points into each of the following images
   dse-config:
     environment:
-      KILLRVIDEO_DSE_EXTERNAL_IP: $KILLRVIDEO_DSE_EXTERNAL_IP
+      KILLRVIDEO_DSE_CONTACT_POINTS: $KILLRVIDEO_DSE_CONTACT_POINTS
 
+  backend:
+    environment:
+      KILLRVIDEO_DSE_CONTACTPOINTS: $KILLRVIDEO_DSE_CONTACT_POINTS
 
+  generator:
+    environment:
+      KILLRVIDEO_DSE_CONTACT_POINTS: $KILLRVIDEO_DSE_CONTACT_POINTS
+
+  web:
+    environment:
+      KILLRVIDEO_DSE_CONTACT_POINTS: $KILLRVIDEO_DSE_CONTACT_POINTS
