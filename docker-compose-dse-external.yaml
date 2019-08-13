@@ -6,8 +6,6 @@ version: '3'
 #
 
 services:
-
-services:
   # Disable running DSE in this Docker compose
   dse:
     entrypoint: ["echo", "Service DSE disabled from running in Docker - external cluster in use"]
