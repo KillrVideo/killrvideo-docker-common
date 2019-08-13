@@ -1,0 +1,38 @@
+version: '3'
+
+#
+# docker-compose.yaml
+#   Override compose file for running DSE with authentication enabled
+#
+
+services:
+    
+  # use custom config file with authentication/authorization enabled
+  dse:
+    volumes:
+      - "./config-secure:/config"
+
+  # configure with credentials
+  dse-config:
+    environment:
+      KILLRVIDEO_DSE_USERNAME: $KILLRVIDEO_DSE_USERNAME
+      KILLRVIDEO_DSE_PASSWORD: $KILLRVIDEO_DSE_PASSWORD
+      KILLRVIDEO_CREATE_DSE_USER: $KILLRVIDEO_CREATE_DSE_USER
+
+  # configure with credentials
+  backend:
+    environment:
+      KILLRVIDEO_DSE_USERNAME: $KILLRVIDEO_DSE_USERNAME
+      KILLRVIDEO_DSE_PASSWORD: $KILLRVIDEO_DSE_PASSWORD
+
+  # configure with credentials
+  generator:
+    environment:
+      KILLRVIDEO_DSE_USERNAME: $KILLRVIDEO_DSE_USERNAME
+      KILLRVIDEO_DSE_PASSWORD: $KILLRVIDEO_DSE_PASSWORD
+
+  # configure with credentials
+  web:
+    environment:
+      KILLRVIDEO_DSE_USERNAME: $KILLRVIDEO_DSE_USERNAME
+      KILLRVIDEO_DSE_PASSWORD: $KILLRVIDEO_DSE_PASSWORD

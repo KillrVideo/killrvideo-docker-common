@@ -1,0 +1,33 @@
+version: '3'
+
+#
+# docker-compose-backend-python.yaml
+#   Override compose file for running the Python services
+#
+
+services:
+  backend:
+    image: killrvideo/killrvideo-python:0.9.2
+    depends_on:
+      - kafka
+
+  # Ensure consistency in Kafka World
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - 2181:2181
+
+  # Start the Kafka Engine for Killrvideo
+  kafka:
+    image: wurstmeister/kafka
+    depends_on:
+      - zookeeper
+    environment:
+      #KAFKA_ADVERTISED_HOST_NAME: kafka
+      #KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "topic-kv-videoCreation:1:1,topic-kv-userCreation:1:1,topic-kv-videoRating:1:1,topic-kv-commentCreation:1:1"
+    ports:
+      - 9092:9092

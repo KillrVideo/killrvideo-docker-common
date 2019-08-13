@@ -1,0 +1,10 @@
+version: '3'
+
+#
+# docker-compose-backend-external.yaml
+#   Override compose file for disabling the backend services (i.e. because you are running them in your IDE)
+#
+
+services:
+  backend:
+    entrypoint: ["echo", "Backend KillrVideo services disabled from running in Docker - external backend in use"]

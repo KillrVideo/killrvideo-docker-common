@@ -1,0 +1,12 @@
+version: '3'
+
+#
+# docker-compose-backend-nodejs.yaml
+#   Override compose file for running the Node.js services
+#
+
+services:
+  backend:
+    image: killrvideo/killrvideo-nodejs
+
+

@@ -1,0 +1,22 @@
+version: '3'
+
+#
+# docker-compose-dse-volumes.yaml
+#   Override compose file to preserve DSE Cassandra data on a separate volume
+#
+
+services:
+    
+  # DataStax Enterprise with KillrVideo schema and search config
+  # configure this as the seed node
+  # start with search and graph modes enabled ("-s -g")
+  dse:
+    volumes:
+      # associate dse-data directory under the directory where we run docker-compose
+      # with the Cassandra data directory on our node
+      # (using relative paths to store at the root directory of the repository which includes
+      # these files, i.e. killrvideo-java or killrvideo-nodejs)
+      - ./dse-data:/var/lib/cassandra
+
+volumes:
+  dse-data:
